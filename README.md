@@ -1,4 +1,4 @@
-# databurgler
+# DataBurgler
 
 <p>
   <b>SOMETHING</b> happened at <b>SOMETIME</b> and we would like to <b>STORE</b> it in <b>Postgres</b>.
@@ -6,9 +6,15 @@
 
 <hr />
 
-### Init
+### 1. Install
+
+```
+    pip install databurglar
+```
+
+### 2. Include Tables
 ```python
-from qa.models import setup_data_collection, setup_surveys
+from databurglar.models import setup_data_collection, setup_surveys
 
 engine: Engine = ...
 
@@ -18,17 +24,21 @@ setup_data_collection(
     UserEvent
 )
 
-## setup tables to build dynamic data collection forms/surveys
+## <optional>: setup tables to build dynamic data collection forms/surveys
 setup_surveys(engine)
 ```
 
-### Queries
+### 3. Queries
 
-### Commands
+### 4. Commands
 
-### Local Project Setup
+
+
+## Local Project Development
+#### windows
 ```
   python3 -m venv env
   .\env\Scripts\activate
+
   pip install -r requirements.txt
 ```
