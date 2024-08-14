@@ -3,45 +3,49 @@ from typing import Optional, Union
 import uuid
 import datetime
 
-from sqlalchemy import DATE, TEXT, ForeignKey, FLOAT, BOOLEAN, String, UniqueConstraint, UUID
+from sqlalchemy import DATE, TEXT, ForeignKey, FLOAT, BOOLEAN, UniqueConstraint, UUID
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
+from sqlalchemy.dialects import postgresql as pg
 
 from .base import Base
-from .data_point import DataPoint, DataType
+from .enums import DataType
 
 
-DataReturnType = Union[str, float, datetime.date, bool]
+DataReturnType = Union[str, float, datetime.date, bool, dict]
 
 
 class DataStore(Base):
     __tablename__ = 'data_store'
     __table_args__ = (
-        UniqueConstraint('user_id', 'group_id', 'data_point_id'),
+        UniqueConstraint('event_id', 'data_point_id'),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
+    event_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID, ForeignKey('event.id'))
     data_point_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('data_point.id'))
 
-    group_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID, default=uuid.uuid4, nullable=True)
-    user_id: Mapped[uuid.UUID] = mapped_column(UUID, default=uuid.uuid4, nullable=True)
-
+    # Data Options
     text: Mapped[Optional[str]] = mapped_column(TEXT, nullable=True)
     number: Mapped[Optional[float]] = mapped_column(FLOAT, nullable=True)
     date: Mapped[Optional[datetime.date]] = mapped_column(DATE, nullable=True)
     boolean: Mapped[Optional[bool]] = mapped_column(BOOLEAN, nullable=True)
+    complex: Mapped[Optional[dict]] = mapped_column(pg.JSON, nullable=True)
 
-    def value(self, data_point: DataPoint) -> Optional[DataReturnType]:
-        if data_point.data_type == DataType.number:
+    def value(self, expected_data_type: DataType) -> Optional[DataReturnType]:
+        if expected_data_type == DataType.number:
             return self.number
         
-        if data_point.data_type == DataType.text:
+        if expected_data_type == DataType.text:
             return self.text
         
-        if data_point.data_type == DataType.date:
+        if expected_data_type == DataType.date:
             return self.date
         
-        if data_point.data_type == DataType.boolean:
+        if expected_data_type == DataType.boolean:
             return self.boolean
+        
+        if expected_data_type == DataType.complex:
+            return self.complex
         
         return None
