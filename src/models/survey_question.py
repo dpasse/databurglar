@@ -13,12 +13,12 @@ from .base import Base
 class SurveyQuestion(Base):
     __tablename__ = 'survey_question'
     __table_args__ = (
-        UniqueConstraint('survey_id', 'data_point_id'),
+        UniqueConstraint('survey_id', 'tag_id'),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
     survey_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('survey.id'))
-    data_point_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('data_point.id'))
+    tag_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('tag.id'))
 
     text: Mapped[str] = mapped_column(TEXT)
 

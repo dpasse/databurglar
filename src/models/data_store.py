@@ -18,12 +18,12 @@ DataReturnType = Union[str, float, datetime.date, bool, dict]
 class DataStore(Base):
     __tablename__ = 'data_store'
     __table_args__ = (
-        UniqueConstraint('event_id', 'data_point_id'),
+        UniqueConstraint('event_id', 'tag_id'),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
     event_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID, ForeignKey('event.id'))
-    data_point_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('data_point.id'))
+    tag_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('tag.id'))
 
     # Data Options
     text: Mapped[Optional[str]] = mapped_column(TEXT, nullable=True)

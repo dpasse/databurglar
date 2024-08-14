@@ -1,7 +1,7 @@
 # qa - SqlAlchemy Plugin for Data Collection
 
 <p>
-  <b>SOMETHING</b> happend at <b>SOMETIME</b> and we would like to <b>COLLECT</b> it.
+  <b>SOMETHING</b> happened at <b>SOMETIME</b> and we would like to <b>COLLECT</b> it.
 </p>
 
 <hr />

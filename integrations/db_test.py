@@ -1,8 +1,9 @@
 import os
 import sys
+import pathlib
 
 
-sys.path.insert(0, os.path.join('../src'))
+sys.path.insert(0, os.path.join(pathlib.Path(__file__).parent.resolve(), '../src'))
 
 from models import setup_data_collection, setup_surveys, UserEvent
 from helpers.connection import connect_to_pg, DatabaseConnection

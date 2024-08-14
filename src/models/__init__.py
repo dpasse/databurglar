@@ -1,8 +1,8 @@
 from .base import Base
 from .enums import DataType
-from .event import UserEvent
-from .data_point import DataPoint
-from .data import DataStore
+from .events import UserEvent
+from .tag import Tag
+from .data_store import DataStore
 from .survey import Survey
 from .survey_question import SurveyQuestion
 
@@ -12,7 +12,7 @@ from sqlalchemy import Engine
 def setup_data_collection(engine: Engine, event_table: Base):
     Base.metadata.create_all(engine, tables=[
         event_table.__table__,
-        DataPoint.__table__,
+        Tag.__table__,
         DataStore.__table__
     ])
 

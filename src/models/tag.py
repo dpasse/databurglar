@@ -10,8 +10,8 @@ from .base import Base
 from .enums import DataType
 
 
-class DataPoint(Base):
-    __tablename__ = 'data_point'
+class Tag(Base):
+    __tablename__ = 'tag'
     __table_args__ = (
         UniqueConstraint('code'),
     )
