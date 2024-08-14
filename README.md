@@ -1,7 +1,7 @@
-# qa - SqlAlchemy Plugin for Data Collection
+# databurgler
 
 <p>
-  <b>SOMETHING</b> happened at <b>SOMETIME</b> and we would like to <b>COLLECT</b> it.
+  <b>SOMETHING</b> happened at <b>SOMETIME</b> and we would like to <b>STORE</b> it in <b>Postgres</b>.
 </p>
 
 <hr />

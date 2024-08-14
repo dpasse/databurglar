@@ -14,3 +14,6 @@ mypy:
 
 run-integrations:
 	python ./integrations/db_test.py
+
+upload:
+	twine upload dist/*
