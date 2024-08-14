@@ -1,8 +1,32 @@
-# qa
+# qa - SqlAlchemy Plugin for Data Collection
 
-## Plugin for SQLAlchemy to handle the data collection process.
+<p>
+  <b>SOMETHING</b> happend at <b>SOMETIME</b> and we would like to <b>COLLECT</b> it.
+</p>
 
-## Project Setup
+<hr />
+
+### Init
+```python
+from qa.models import setup_data_collection, setup_surveys
+
+engine: Engine = ...
+
+## setup tables to collect data based on a `UserEvent`
+setup_data_collection(
+    engine,
+    UserEvent
+)
+
+## setup tables to build dynamic data collection forms/surveys
+setup_surveys(engine)
+```
+
+### Queries
+
+### Commands
+
+### Local Project Setup
 ```
   python3 -m venv env
   .\env\Scripts\activate
