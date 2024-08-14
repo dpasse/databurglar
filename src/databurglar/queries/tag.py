@@ -12,7 +12,8 @@ class ByIds:
         return select(Tag).where(
             Tag.id.in_(ids)
         )
-    
+
+
 class ByCodes:
     @staticmethod
     def generate(codes: Set[str]) -> Select:
