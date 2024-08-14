@@ -1,4 +1,4 @@
-# DataBurgler
+# DataBurglar
 
 <p>
   <b>SOMETHING</b> happened at <b>SOMETIME</b> and we would like to <b>STORE</b> it in <b>Postgres</b>.
