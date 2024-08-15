@@ -4,8 +4,7 @@ import uuid
 import datetime
 
 from sqlalchemy import DATE, TEXT, ForeignKey, FLOAT, BOOLEAN, UniqueConstraint, UUID
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects import postgresql as pg
 
 from .base import Base

@@ -2,10 +2,8 @@ from typing import List
 
 import uuid
 
-from sqlalchemy import TEXT, ForeignKey, String, UniqueConstraint, UUID, BOOLEAN
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.dialects import postgresql as pg
+from sqlalchemy import TEXT, ForeignKey, UniqueConstraint, UUID, BOOLEAN
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
 
@@ -23,7 +21,3 @@ class SurveyQuestion(Base):
     text: Mapped[str] = mapped_column(TEXT)
 
     is_required: Mapped[bool] = mapped_column(BOOLEAN, default=False)
-    validators: Mapped[List[str]] = mapped_column(
-        pg.ARRAY(String(125)),
-        default=list
-    )

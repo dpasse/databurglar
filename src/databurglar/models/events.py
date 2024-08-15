@@ -2,8 +2,7 @@ import uuid
 
 from datetime import datetime
 from sqlalchemy import UUID, String, TIMESTAMP, UniqueConstraint
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
 

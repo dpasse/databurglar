@@ -1,10 +1,10 @@
-from typing import Optional
+from typing import List, Optional
 
 import uuid
 
 from sqlalchemy import Enum, String, UniqueConstraint, UUID
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.dialects import postgresql as pg
 
 from .base import Base
 from .enums import DataType
@@ -21,6 +21,10 @@ class Tag(Base):
     code: Mapped[str] = mapped_column(String(10))
     name: Mapped[str] = mapped_column(String(125))
     units: Mapped[str] = mapped_column(String(15), nullable=True)
+    validators: Mapped[List[str]] = mapped_column(
+        pg.ARRAY(String(125)),
+        default=list
+    )
 
     @property
     def is_measurement(self) -> bool:
