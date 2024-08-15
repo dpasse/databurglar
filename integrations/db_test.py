@@ -1,12 +1,15 @@
 import os
 import sys
+import uuid
 import pathlib
+from datetime import datetime
 
 
 sys.path.insert(0, os.path.join(pathlib.Path(__file__).parent.resolve(), '../src'))
 
 from databurglar.models import setup_data_collection, setup_surveys, UserEvent
 from databurglar.helpers.connection import connect_to_pg, DatabaseConnection
+from databurglar.helpers.executors import insert
 
  
 if __name__ == '__main__':
@@ -22,3 +25,11 @@ if __name__ == '__main__':
 
     setup_data_collection(engine, UserEvent)
     setup_surveys(engine)
+
+    ## add data
+
+    data = [
+        UserEvent(user_id=uuid.uuid4(), label='test', timestamp=datetime.now())
+    ]
+
+    insert(engine, *data)

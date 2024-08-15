@@ -19,4 +19,9 @@ class Tag(Base):
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
     data_type: Mapped[DataType] = mapped_column(Enum(DataType), nullable=False)
     code: Mapped[str] = mapped_column(String(10))
-    name: Mapped[Optional[str]] = mapped_column(String(125), nullable=True)
+    name: Mapped[str] = mapped_column(String(125))
+    units: Mapped[str] = mapped_column(String(15), nullable=True)
+
+    @property
+    def is_measurement(self) -> bool:
+        return self.units not in ('', None)

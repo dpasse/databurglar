@@ -12,14 +12,16 @@ class ByIds:
         return select(DataStore).where(
             DataStore.id.in_(ids)
         )
-    
+
+
 class ByEvents:
     @staticmethod
     def generate(event_ids: Set[uuid.UUID]) -> Select:
         return select(DataStore).where(
             DataStore.event_id.in_(event_ids)
         )
-    
+
+
 class ByEventAndTags:
     @staticmethod
     def generate(event_id: uuid.UUID, tags: Set[uuid.UUID]) -> Select:

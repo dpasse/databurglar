@@ -2,12 +2,14 @@ from typing import cast
 from sqlalchemy import Engine, Table
 
 from .base import Base
+from .typings import DataReturnType
+from .pocos import Measurement
 from .enums import DataType
 from .events import UserEvent
 from .tag import Tag
-from .data_store import DataStore
-from .survey import Survey
 from .survey_question import SurveyQuestion
+from .data_store import DataStore, TaggedData
+from .survey import Survey
 
 
 def setup_data_collection(engine: Engine, event_table: Base):

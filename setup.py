@@ -9,13 +9,13 @@ with open('plugin_requirements.txt') as f:
 
 setuptools.setup(
     name='databurglar',
-    version='0.0.1',
+    version='0.0.2',
     keywords='Data Collection, SqlAlchemy',
     description='SQLAlchemy Package for data tracking.',
     packages=setuptools.find_packages('src'),
     package_dir={'': 'src'},
     install_requires=install_requires,
-    url='https://github.com/dpasse/qa',
+    url='https://github.com/dpasse/databurglar',
     long_description=long_description,
     long_description_content_type='text/markdown',
     entry_points = {}
