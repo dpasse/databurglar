@@ -37,7 +37,7 @@ setup_surveys(engine)
 ## Local Project Development
 #### windows
 ```
-  python3 -m venv env
+  python -m venv env
   .\env\Scripts\activate
 
   pip install -r requirements.txt

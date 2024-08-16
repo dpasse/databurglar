@@ -9,7 +9,8 @@ with open('plugin_requirements.txt') as f:
 
 setuptools.setup(
     name='databurglar',
-    version='0.0.2',
+    version='0.0.3',
+    python_requires='>=3.12.5',
     keywords='Data Collection, SqlAlchemy',
     description='SQLAlchemy Package for data tracking.',
     packages=setuptools.find_packages('src'),

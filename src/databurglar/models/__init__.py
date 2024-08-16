@@ -3,12 +3,12 @@ from sqlalchemy import Engine, Table
 
 from .base import Base
 from .typings import DataReturnType
-from .pocos import Measurement
+from .pocos import Measurement, Calculation
 from .enums import DataType
 from .events import UserEvent
 from .tag import Tag
 from .survey_question import SurveyQuestion
-from .data_store import DataStore, TaggedData
+from .data_store import DataStore, TaggedData, DataByCode
 from .survey import Survey
 
 

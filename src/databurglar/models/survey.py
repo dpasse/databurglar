@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Union
 
 import uuid
 import datetime
@@ -20,4 +20,4 @@ class Survey(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
     code: Mapped[str] = mapped_column(String(20))
-    name: Mapped[Optional[str]] = mapped_column(String(250), nullable=True)
+    name: Mapped[str | None] = mapped_column(String(250), nullable=True)

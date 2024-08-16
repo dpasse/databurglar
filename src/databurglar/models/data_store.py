@@ -1,5 +1,4 @@
-from typing import Optional
-
+from typing import Dict, List
 import uuid
 import datetime
 
@@ -18,13 +17,13 @@ class TaggedData(Base):
     __abstract__ = True
 
     tag_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('tag.id'))
-    text: Mapped[Optional[str]] = mapped_column(TEXT, nullable=True)
-    number: Mapped[Optional[float]] = mapped_column(FLOAT, nullable=True)
-    date: Mapped[Optional[datetime.date]] = mapped_column(DATE, nullable=True)
-    boolean: Mapped[Optional[bool]] = mapped_column(BOOLEAN, nullable=True)
-    complex: Mapped[Optional[dict]] = mapped_column(pg.JSON, nullable=True)
+    text: Mapped[str | None] = mapped_column(TEXT, nullable=True)
+    number: Mapped[float | None] = mapped_column(FLOAT, nullable=True)
+    date: Mapped[datetime.date | None] = mapped_column(DATE, nullable=True)
+    boolean: Mapped[bool | None] = mapped_column(BOOLEAN, nullable=True)
+    complex: Mapped[dict | None] = mapped_column(pg.JSON, nullable=True)
 
-    def get_value(self, tag: Tag) -> Optional[DataReturnType]:
+    def get_value(self, tag: Tag) -> DataReturnType | None:
         if tag.data_type == DataType.number:
             return self.number
         
@@ -42,7 +41,7 @@ class TaggedData(Base):
         
         return None
     
-    def get_measurement(self, tag: Tag) -> Optional[Measurement]:
+    def get_measurement(self, tag: Tag) -> Measurement | None:
         if tag.is_measurement:
             return Measurement(
                 value=self.get_value(tag),
@@ -59,4 +58,12 @@ class DataStore(TaggedData):
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
-    event_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID, ForeignKey('event.id'))
+    event_id: Mapped[uuid.UUID | None] = mapped_column(UUID, ForeignKey('event.id'))
+
+
+class DataByCode:
+    def __init__(self, data: Dict[str, List[DataStore]]) -> None:
+        self._data = data
+
+    def get(self, code: str) -> List[DataStore]:
+        return self._data.get(code, [])

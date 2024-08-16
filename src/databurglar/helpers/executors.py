@@ -1,4 +1,5 @@
-from sqlalchemy import ChunkedIteratorResult, Engine, Select
+from typing import Any
+from sqlalchemy import Result, Engine, Select
 from sqlalchemy.orm import Session
 
 
@@ -8,6 +9,6 @@ def insert(engine: Engine, *args) -> None:
         session.commit()
 
 
-def query(engine: Engine, statement: Select) -> ChunkedIteratorResult:
+def query(engine: Engine, statement: Select) -> Result[Any]:
     with Session(engine) as session:
         return session.execute(statement)
