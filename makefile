@@ -17,3 +17,6 @@ run-integrations:
 
 upload:
 	twine upload dist/*
+
+pylint:
+	pylint ./src/databurglar

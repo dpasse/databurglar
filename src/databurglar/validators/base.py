@@ -6,7 +6,7 @@ from ..models import DataReturnType, Tag
 class AbstractTagValidator(ABC):
     @property
     @abstractmethod
-    def key(self) -> str:
+    def name(self) -> str:
         pass
 
     @abstractmethod

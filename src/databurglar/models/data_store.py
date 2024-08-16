@@ -24,23 +24,23 @@ class TaggedData(Base):
     complex: Mapped[dict | None] = mapped_column(pg.JSON, nullable=True)
 
     def get_value(self, tag: Tag) -> DataReturnType | None:
-        if tag.data_type == DataType.number:
+        if tag.data_type == DataType.NUMBER:
             return self.number
-        
-        if tag.data_type == DataType.text:
+
+        if tag.data_type == DataType.TEXT:
             return self.text
-        
-        if tag.data_type == DataType.date:
+
+        if tag.data_type == DataType.DATE:
             return self.date
-        
-        if tag.data_type == DataType.boolean:
+
+        if tag.data_type == DataType.BOOLEAN:
             return self.boolean
-        
-        if tag.data_type == DataType.complex:
+
+        if tag.data_type == DataType.COMPLEX:
             return self.complex
-        
+
         return None
-    
+
     def get_measurement(self, tag: Tag) -> Measurement | None:
         if tag.is_measurement:
             return Measurement(

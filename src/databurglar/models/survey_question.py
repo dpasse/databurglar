@@ -1,5 +1,3 @@
-from typing import List
-
 import uuid
 
 from sqlalchemy import TEXT, ForeignKey, UniqueConstraint, UUID, BOOLEAN

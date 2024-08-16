@@ -11,13 +11,7 @@ class DatabaseConnection:
     database: str
 
 
-def connect_to_pg(connection: DatabaseConnection) -> Engine:
+def connect_to_pg(conn: DatabaseConnection) -> Engine:
     return create_engine(
-        url="postgresql://{0}:{1}@{2}:{3}/{4}".format(
-            connection.user,
-            connection.password,
-            connection.host,
-            connection.port,
-            connection.database
-        )
+        url=f'postgresql://{conn.user}:{conn.password}@{conn.host}:{conn.port}/{conn.database}'
     )
