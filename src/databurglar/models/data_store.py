@@ -3,11 +3,13 @@ import uuid
 import datetime
 
 from sqlalchemy import DATE, TEXT, ForeignKey, FLOAT, BOOLEAN, UniqueConstraint, UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship, backref
 from sqlalchemy.dialects import postgresql as pg
+
 
 from .base import Base
 from .enums import DataType
+from .events import UserEvent
 from .typings import DataReturnType
 from .pocos import Measurement
 from .tag import Tag
@@ -22,6 +24,7 @@ class TaggedData(Base):
     date: Mapped[datetime.date | None] = mapped_column(DATE, nullable=True)
     boolean: Mapped[bool | None] = mapped_column(BOOLEAN, nullable=True)
     complex: Mapped[dict | None] = mapped_column(pg.JSON, nullable=True)
+    is_valid: Mapped[bool] = mapped_column(BOOLEAN, default=False)
 
     def get_value(self, tag: Tag) -> DataReturnType | None:
         if tag.data_type == DataType.NUMBER:
@@ -58,7 +61,8 @@ class DataStore(TaggedData):
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
-    event_id: Mapped[uuid.UUID | None] = mapped_column(UUID, ForeignKey('event.id'))
+    event_id: Mapped[uuid.UUID] = mapped_column(UUID, ForeignKey('event.id'))
+    event: Mapped[UserEvent] = relationship(UserEvent, uselist=False, backref=backref('data_store'))
 
 
 class DataByCode:

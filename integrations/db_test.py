@@ -24,7 +24,7 @@ if __name__ == '__main__':
         )
     )
 
-    setup_data_collection(engine, UserEvent)
+    setup_data_collection(engine)
     setup_surveys(engine)
 
     ## add data

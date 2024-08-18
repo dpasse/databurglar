@@ -11,10 +11,9 @@ from .survey_question import SurveyQuestion
 from .data_store import DataStore, TaggedData, DataByCode
 from .survey import Survey
 
-
-def setup_data_collection(engine: Engine, event_table: Base):
+def setup_data_collection(engine: Engine):
     Base.metadata.create_all(engine, tables=[
-        cast(Table, event_table.__table__),
+        cast(Table, UserEvent.__table__),
         cast(Table, Tag.__table__),
         cast(Table, DataStore.__table__),
     ])

@@ -10,5 +10,5 @@ class AbstractTagValidator(ABC):
         pass
 
     @abstractmethod
-    def validate(self, tag: Tag, value: DataReturnType | None) -> bool:
+    def is_valid(self, tag: Tag, value: DataReturnType | None) -> bool:
         pass
