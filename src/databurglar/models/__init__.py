@@ -5,15 +5,15 @@ from .base import Base
 from .typings import DataReturnType
 from .pocos import Measurement, Calculation
 from .enums import DataType
-from .events import UserEvent
+from .events import TEvent, UserEvent, AbstractEvent
 from .tag import Tag
 from .survey_question import SurveyQuestion
 from .data_store import DataStore, TaggedData, DataByCode
 from .survey import Survey
 
-def setup_data_collection(engine: Engine):
+def setup_data_collection(engine: Engine, event_table: TEvent):
     Base.metadata.create_all(engine, tables=[
-        cast(Table, UserEvent.__table__),
+        cast(Table, event_table.__table__),
         cast(Table, Tag.__table__),
         cast(Table, DataStore.__table__),
     ])
